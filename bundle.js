@@ -35,8 +35,8 @@ for (const index in files) {
         .relative(process.cwd(), files[index])
         .replace('.lua', '');
       if (
-        filePath !== 'src\\StarterGUI\\Scripts\\Main\\init' &&
-        filePath !== 'src/StarterGUI/Scripts/Main/init' &&
+        filePath !== 'src\\init' &&
+        filePath !== 'src/init' &&
         !filePath.endsWith('.client')
       ) {
         arguments += ' ' + filePath.replace(/\\/g, '/') + '';
