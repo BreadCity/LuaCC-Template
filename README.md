@@ -6,11 +6,10 @@ Simple Template for using LuaCC.
 
 To bundle, run [`bundle.cmd`](bundle.cmd) or [`bundle.ps1`](bundle.ps1) - The output file will be in the `dist` directory.
 
-To test in studio, use Rojo.
+The index file is `index`. This is the file that gets run, and can load other scripts using `require`.
 
-For further information, see [src/StarterGUI](src/StarterGUI/)
-
-**Notice: all occurences of `###hash###` are replaced with the SHA256 Hash of the script, and all occurences of `NOT_BUNDLED` are replaced with `BUNDLED`**
+**Notice: all occurences of `###hash###` are replaced with the SHA256 Hash of the script, and all occurences of `NOT_BUNDLED` are replaced with `BUNDLED`**<br/>
+This means you can do things like `local isProduction = 'NOT_BUNDLED' == 'BUNDLED'`
 
 ## License
 
