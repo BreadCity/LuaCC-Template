@@ -14,6 +14,7 @@ local tonumber = tonumber;
 local ipairs = ipairs;
 local getfenv = getfenv;
 local getgenv = getgenv;
+local originalreq = require
 -- General Polyfill
 local fenv = (getfenv or function()
   return _ENV
@@ -26,6 +27,9 @@ if _VERSION == "Luau" then
   require = (function(cache)
     return (function(moduleName, ...)
       if cache[moduleName] then
+        return cache[moduleName]
+      elseif typeof(moduleName) == "Instance" then
+        cache[moduleName] = originalreq(moduleName, ...)
         return cache[moduleName]
       else
         cache[moduleName] = package["searchers"][2](moduleName, ...)()
