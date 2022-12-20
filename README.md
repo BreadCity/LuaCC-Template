@@ -1,15 +1,36 @@
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
-# LuaCC Template
+# Lua Bundling Template
 
-Simple Template for using LuaCC.
+Simple Template for using ~~LuaCC~~ A custom Lua Bundler inspired by LuaCC.
 
-To bundle, run [`bundle.cmd`](bundle.cmd) or [`bundle.ps1`](bundle.ps1) - The output file will be in the `dist` directory.
+To initially set shit up, install [NodeJS](https://nodejs.org/), verify it's installed by running `node --version` (if this errors, restart your PC & try again), then run `npm i` to install dependencies.
+
+Once dependencies are installed, you can build using `npm run build` (`npm run build --no-minify` for no minification). If you want a development server, you can run `npm run dev`.
 
 The index file is `index`. This is the file that gets run, and can load other scripts using `require`.
 
-**Notice: all occurences of `###hash###` are replaced with the SHA256 Hash of the script, and all occurences of `NOT_BUNDLED` are replaced with `BUNDLED`**<br/>
-This means you can do things like `local isProduction = 'NOT_BUNDLED' == 'BUNDLED'`
+## Customization
+After running build the first time, a new `bundler-config` directory will be created. This contains the prefix & suffix, including the custom `require()` implementation aswell as other functionality.
+
+## Variables
+
+The following variables are provided out-of-the-box (*note: these are provided by [blb](https://github.com/MokiyCodes/blb/), not the template itself*):
+
+| name              | description                                     | example value                              |
+|-------------------|-------------------------------------------------|--------------------------------------------|
+| `__hash`          | SHA-512 Hash of the Source of the current file. | `e6578[...]da685` (128 hex digits)         |
+| `__dirname`       | The Script's Directory, relative to `src`       | `path/to/some/script/directory`            |
+| `__filename`      | The Script's Filename                           | `path/to/some/script/directory/script.lua` |
+| `__just_filename` | The Script's Filename without the Directory     | `script.lua`                               |
+
+## Module Resolution
+
+### Indexes
+You can resolve a file at `test/a/index.lua` by requiring `test/a`.
+
+### Paths
+Both POSIX & Win32 paths are supported.
 
 ## License
 
